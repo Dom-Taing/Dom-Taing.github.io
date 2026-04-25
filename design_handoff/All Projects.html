@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Alex Chen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hanada:   #1b55a6;
+  --yamabuki: #f5a623;
+  --tokiwa:   #00714a;
+  --bg:       #f7f4ec;
+  --bg-warm:  #ede9db;
+  --ink:      #141220;
+  --ink-mid:  #49465e;
+  --ink-soft: #8c89a2;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px; height: 64px;
+  background: rgba(14,12,26,.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 17px; color: #fff; }
+.nav-logo span { color: var(--yamabuki); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+.nav-cta { background: var(--yamabuki) !important; color: var(--ink) !important; padding: 8px 22px; border-radius: 2px; font-weight: 600 !important; }
+
+/* PAGE HEADER */
+.page-header {
+  padding: 140px 56px 72px;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+.page-header::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.ph-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 10vw, 140px);
+  line-height: .92; color: #fff; letter-spacing: .02em;
+  position: relative; z-index: 1;
+}
+.ph-big span { color: var(--yamabuki); }
+.ph-sub {
+  font-size: 15px; color: rgba(255,255,255,.4);
+  margin-top: 20px; position: relative; z-index: 1;
+}
+.ph-back {
+  position: absolute; top: 84px; right: 56px; z-index: 10;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.4); transition: color .2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.ph-back:hover { color: #fff; }
+
+/* FILTERS */
+.filter-bar {
+  background: var(--bg-warm);
+  padding: 20px 56px;
+  display: flex; gap: 8px; align-items: center;
+  border-bottom: 1px solid rgba(27,85,166,.1);
+  position: sticky; top: 64px; z-index: 100;
+}
+.filter-label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); margin-right: 8px; }
+.filter-btn {
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 7px 18px; border-radius: 2px; cursor: pointer;
+  border: 1px solid rgba(27,85,166,.18);
+  background: transparent; color: var(--ink-mid);
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+}
+.filter-btn:hover { border-color: var(--hanada); color: var(--hanada); }
+.filter-btn.active { background: var(--hanada); color: #fff; border-color: var(--hanada); }
+
+/* GRID */
+.projects-grid {
+  padding: 56px 56px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.p-card {
+  background: var(--bg-warm);
+  padding: 36px;
+  position: relative; overflow: hidden;
+  transition: background .25s, transform .3s;
+  transform-style: preserve-3d; will-change: transform;
+  cursor: pointer;
+}
+.p-card:hover { background: #fff; }
+.p-card.hidden { display: none; }
+.p-card-accent { position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+.acc-b { background: var(--hanada); }
+.acc-g { background: var(--yamabuki); }
+.acc-t { background: var(--tokiwa); }
+.p-card-type {
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 18px; font-weight: 600;
+}
+.p-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: rgba(27,85,166,.3); letter-spacing: .12em; margin-bottom: 12px; }
+.p-card-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 10px; line-height: 1.2; }
+.p-card-desc { font-size: 13px; line-height: 1.75; color: var(--ink-mid); margin-bottom: 20px; }
+.p-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+.ptag { font-size: 10px; padding: 3px 8px; border-radius: 2px; background: rgba(27,85,166,.08); color: var(--hanada); font-weight: 500; letter-spacing: .04em; }
+.p-card-links { display: flex; gap: 16px; }
+.plink {
+  font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--hanada); border-bottom: 1px solid currentColor; padding-bottom: 1px;
+  transition: color .2s;
+}
+.plink:hover { color: var(--yamabuki); border-color: var(--yamabuki); }
+.p-card-featured-badge {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--yamabuki); color: var(--ink);
+  font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px;
+}
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* FOOTER */
+footer {
+  background: var(--ink); padding: 28px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.f-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,.35); }
+.f-copy { font-size: 12px; color: rgba(255,255,255,.2); letter-spacing: .06em; }
+.f-dots { display: flex; gap: 6px; }
+.fdot { width: 9px; height: 9px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="Portfolio.html">Alex<span>.</span></a></div>
+  <ul class="nav-links">
+    <li><a href="Portfolio.html#about">About</a></li>
+    <li><a href="Portfolio.html#experience">Experience</a></li>
+    <li><a href="All Projects.html" class="active">Projects</a></li>
+    <li><a href="Portfolio.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <a href="Portfolio.html" class="ph-back">← Back Home</a>
+  <div class="ph-big">All<br><span>Projects.</span></div>
+  <p class="ph-sub">9 projects across web apps, developer tools, and experiments.</p>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+  <button class="filter-btn" onclick="filterCards('web', this)">Web Apps</button>
+  <button class="filter-btn" onclick="filterCards('tool', this)">Dev Tools</button>
+  <button class="filter-btn" onclick="filterCards('experiment', this)">Experiments</button>
+</div>
+
+<div class="projects-grid">
+
+  <div class="p-card reveal" data-type="web">
+    <div class="p-card-accent acc-b"></div>
+    <div class="p-card-featured-badge">Featured</div>
+    <div class="p-card-type">Web App</div>
+    <div class="p-card-num">01</div>
+    <h3 class="p-card-title">Finance Dashboard</h3>
+    <p class="p-card-desc">Real-time multi-account financial tracker with intelligent categorization, budget forecasting, and WebSocket live updates. Serving 50,000+ users.</p>
+    <div class="p-card-tags"><span class="ptag">React</span><span class="ptag">Go</span><span class="ptag">PostgreSQL</span><span class="ptag">WebSockets</span></div>
+    <div class="p-card-links">
+      <a href="Project Detail.html" class="plink">Case Study</a>
+      <a href="#" class="plink">GitHub</a>
+      <a href="#" class="plink">Live</a>
+    </div>
+  </div>
+
+  <div class="p-card reveal" data-type="tool">
+    <div class="p-card-accent acc-g"></div>
+    <div class="p-card-featured-badge">Featured</div>
+    <div class="p-card-type">Dev Tool</div>
+    <div class="p-card-num">02</div>
+    <h3 class="p-card-title">API Mocking Platform</h3>
+    <p class="p-card-desc">Create, manage, and share realistic mock APIs in seconds. Used by 3,000+ developers globally for frontend development and testing.</p>
+    <div class="p-card-tags"><span class="ptag">Next.js</span><span class="ptag">Node.js</span><span class="ptag">GraphQL</span></div>
+    <div class="p-card-links">
+      <a href="Project Detail.html" class="plink">Case Study</a>
+      <a href="#" class="plink">GitHub</a>
+    </div>
+  </div>
+
+  <div class="p-card reveal" data-type="web">
+    <div class="p-card-accent acc-t"></div>
+    <div class="p-card-featured-badge">Featured</div>
+    <div class="p-card-type">Web App</div>
+    <div class="p-card-num">03</div>
+    <h3 class="p-card-title">Headless CMS</h3>
+    <p class="p-card-desc">Lightweight headless content engine with drag-and-drop editor, multi-locale support, and a typed REST + GraphQL API layer.</p>
+    <div class="p-card-tags"><span class="ptag">TypeScript</span><span class="ptag">Next.js</span><span class="ptag">Prisma</span></div>
+    <div class="p-card-links">
+      <a href="Project Detail.html" class="plink">Case Study</a>
+      <a href="#" class="plink">GitHub</a>
+    </div>
+  </div>
+
+  <div class="p-card reveal" data-type="tool">
+    <div class="p-card-accent acc-b"></div>
+    <div class="p-card-type">Dev Tool</div>
+    <div class="p-card-num">04</div>
+    <h3 class="p-card-title">pg-migrate-cli</h3>
+    <p class="p-card-desc">Zero-dependency PostgreSQL migration tool for Node.js. Simple, fast, and reliable. 400+ GitHub stars and actively maintained.</p>
+    <div class="p-card-tags"><span class="ptag">Node.js</span><span class="ptag">CLI</span><span class="ptag">PostgreSQL</span></div>
+    <div class="p-card-links"><a href="#" class="plink">GitHub</a><a href="#" class="plink">npm</a></div>
+  </div>
+
+  <div class="p-card reveal" data-type="web">
+    <div class="p-card-accent acc-t"></div>
+    <div class="p-card-type">Web App</div>
+    <div class="p-card-num">05</div>
+    <h3 class="p-card-title">Kumo Notes</h3>
+    <p class="p-card-desc">End-to-end encrypted markdown notes with offline-first sync using CRDTs. Works seamlessly across devices without a server.</p>
+    <div class="p-card-tags"><span class="ptag">React</span><span class="ptag">CRDT</span><span class="ptag">IndexedDB</span></div>
+    <div class="p-card-links"><a href="#" class="plink">GitHub</a><a href="#" class="plink">Live</a></div>
+  </div>
+
+  <div class="p-card reveal" data-type="tool">
+    <div class="p-card-accent acc-g"></div>
+    <div class="p-card-type">Dev Tool</div>
+    <div class="p-card-num">06</div>
+    <h3 class="p-card-title">react-schema-form</h3>
+    <p class="p-card-desc">Generate fully-typed React forms from JSON Schema or Zod schemas. Handles validation, nested objects, and custom renderers.</p>
+    <div class="p-card-tags"><span class="ptag">React</span><span class="ptag">Zod</span><span class="ptag">TypeScript</span></div>
+    <div class="p-card-links"><a href="#" class="plink">GitHub</a><a href="#" class="plink">npm</a></div>
+  </div>
+
+  <div class="p-card reveal" data-type="experiment">
+    <div class="p-card-accent acc-b"></div>
+    <div class="p-card-type">Experiment</div>
+    <div class="p-card-num">07</div>
+    <h3 class="p-card-title">Terrain Generator</h3>
+    <p class="p-card-desc">Procedural 3D terrain generator using Perlin noise, erosion simulation, and Three.js. Export to glTF or heightmap PNG.</p>
+    <div class="p-card-tags"><span class="ptag">Three.js</span><span class="ptag">WebGL</span><span class="ptag">GLSL</span></div>
+    <div class="p-card-links"><a href="#" class="plink">GitHub</a><a href="#" class="plink">Live Demo</a></div>
+  </div>
+
+  <div class="p-card reveal" data-type="experiment">
+    <div class="p-card-accent acc-g"></div>
+    <div class="p-card-type">Experiment</div>
+    <div class="p-card-num">08</div>
+    <h3 class="p-card-title">Fluid Simulation</h3>
+    <p class="p-card-desc">GPU-accelerated 2D fluid simulation running entirely in the browser via WebGL compute shaders. Interactive — click to disturb the fluid.</p>
+    <div class="p-card-tags"><span class="ptag">WebGL</span><span class="ptag">GLSL</span><span class="ptag">Canvas API</span></div>
+    <div class="p-card-links"><a href="#" class="plink">GitHub</a><a href="#" class="plink">Live Demo</a></div>
+  </div>
+
+  <div class="p-card reveal" data-type="tool">
+    <div class="p-card-accent acc-t"></div>
+    <div class="p-card-type">Dev Tool</div>
+    <div class="p-card-num">09</div>
+    <h3 class="p-card-title">Chronicle — Dev Logger</h3>
+    <p class="p-card-desc">Structured logging library for Node.js with automatic context propagation, pretty terminal output, and JSON log streaming.</p>
+    <div class="p-card-tags"><span class="ptag">Node.js</span><span class="ptag">TypeScript</span><span class="ptag">CLI</span></div>
+    <div class="p-card-links"><a href="#" class="plink">GitHub</a><a href="#" class="plink">npm</a></div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="f-logo"><a href="Portfolio.html">Alex Chen</a></div>
+  <div class="f-copy">© 2026 — Built with care.</div>
+  <div class="f-dots">
+    <div class="fdot" style="background:var(--hanada)"></div>
+    <div class="fdot" style="background:var(--yamabuki)"></div>
+    <div class="fdot" style="background:var(--tokiwa)"></div>
+  </div>
+</footer>
+
+<script>
+/* Filter */
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.p-card').forEach(card => {
+    const match = type === 'all' || card.dataset.type === type;
+    card.classList.toggle('hidden', !match);
+  });
+}
+
+/* 3D card tilt */
+document.querySelectorAll('.p-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 6}deg) translateZ(4px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* Reveal */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

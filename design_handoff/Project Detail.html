@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Dashboard — Alex Chen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hanada:   #1b55a6;
+  --yamabuki: #f5a623;
+  --tokiwa:   #00714a;
+  --bg:       #f7f4ec;
+  --bg-warm:  #ede9db;
+  --ink:      #141220;
+  --ink-mid:  #49465e;
+  --ink-soft: #8c89a2;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px; height: 64px;
+  background: rgba(14,12,26,.9); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 17px; color: #fff; }
+.nav-logo span { color: var(--yamabuki); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); transition: color .2s; }
+.nav-links a:hover { color: #fff; }
+.nav-cta { background: var(--yamabuki) !important; color: var(--ink) !important; padding: 8px 22px; border-radius: 2px; font-weight: 600 !important; }
+
+/* PROJECT HERO */
+.proj-hero {
+  padding: 128px 56px 80px;
+  background: var(--ink);
+  display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: end;
+  position: relative; overflow: hidden;
+}
+.proj-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.proj-hero-back {
+  position: absolute; top: 80px; left: 56px;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); transition: color .2s; z-index: 2;
+  display: flex; align-items: center; gap: 8px;
+}
+.proj-hero-back:hover { color: rgba(255,255,255,.7); }
+.proj-hero-left { position: relative; z-index: 1; }
+.proj-type {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--yamabuki); margin-bottom: 20px; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+}
+.proj-type::before { content: ''; width: 20px; height: 1px; background: currentColor; display: inline-block; }
+.proj-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 7vw, 108px); line-height: .92;
+  color: #fff; letter-spacing: .02em; margin-bottom: 24px;
+}
+.proj-hero-desc {
+  font-size: 17px; line-height: 1.75; color: rgba(255,255,255,.5);
+  max-width: 540px; margin-bottom: 40px;
+}
+.proj-hero-actions { display: flex; gap: 16px; }
+.btn-primary {
+  background: var(--yamabuki); color: var(--ink);
+  padding: 13px 32px; font-weight: 700; font-size: 12px;
+  letter-spacing: .14em; text-transform: uppercase; border-radius: 2px;
+  display: inline-block; transition: transform .2s, box-shadow .2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(245,166,35,.3); }
+.btn-outline-dark {
+  color: rgba(255,255,255,.5); font-size: 12px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.15); padding: 13px 28px; border-radius: 2px;
+  display: inline-block; transition: all .2s;
+}
+.btn-outline-dark:hover { color: #fff; border-color: rgba(255,255,255,.4); }
+
+.proj-hero-meta { position: relative; z-index: 1; }
+.meta-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 4px; padding: 28px;
+}
+.meta-item { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+.meta-item:last-child { border-bottom: none; padding-bottom: 0; }
+.meta-item:first-child { padding-top: 0; }
+.meta-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 5px; }
+.meta-val { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.8); }
+.meta-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.mtag { font-size: 10px; padding: 3px 9px; border-radius: 2px; background: rgba(27,85,166,.3); color: rgba(255,255,255,.7); }
+.meta-stat { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--yamabuki); line-height: 1; }
+
+/* MOCKUP */
+.proj-mockup-section {
+  background: var(--bg-warm);
+  padding: 56px;
+  border-top: 3px solid var(--hanada);
+}
+.proj-mockup-main {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--bg);
+  border: 1px dashed rgba(27,85,166,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-family: monospace; color: var(--ink-soft);
+  margin-bottom: 16px; position: relative; overflow: hidden;
+}
+.proj-mockup-main::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(27,85,166,.04) 20px, rgba(27,85,166,.04) 21px);
+}
+.proj-mockup-main span { position: relative; z-index: 1; text-align: center; line-height: 1.6; }
+.proj-mockup-thumbs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.proj-thumb {
+  aspect-ratio: 16/10; background: var(--bg);
+  border: 1px dashed rgba(27,85,166,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: monospace; color: var(--ink-soft);
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: border-color .2s;
+}
+.proj-thumb:hover { border-color: var(--hanada); }
+.proj-thumb::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 14px, rgba(27,85,166,.04) 14px, rgba(27,85,166,.04) 15px);
+}
+.proj-thumb span { position: relative; z-index: 1; }
+
+/* CONTENT SECTIONS */
+.proj-body { padding: 80px 56px; }
+.proj-body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px; }
+.content-block { }
+.cb-label {
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.cb-label::before { content: ''; width: 16px; height: 1px; background: currentColor; display: inline-block; }
+.cb-h3 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 16px; line-height: 1.2; }
+.cb-body { font-size: 15px; line-height: 1.85; color: var(--ink-mid); }
+.cb-body + .cb-body { margin-top: 16px; }
+
+.highlight-block {
+  background: var(--bg-warm); padding: 32px 36px;
+  border-left: 4px solid var(--yamabuki); margin: 40px 0;
+  font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 600;
+  color: var(--ink); line-height: 1.5;
+}
+
+/* IMPACT METRICS */
+.metrics-section {
+  background: var(--hanada);
+  padding: 72px 56px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.metric { padding: 0 32px; border-right: 1px solid rgba(255,255,255,.12); }
+.metric:first-child { padding-left: 0; }
+.metric:last-child { border-right: none; }
+.metric-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1;
+  color: #fff; margin-bottom: 8px; letter-spacing: .02em;
+}
+.metric-unit { color: var(--yamabuki); font-size: 40px; }
+.metric-label { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+/* TECH DEEP DIVE */
+.tech-section { padding: 80px 56px; background: var(--bg-warm); border-top: 1px solid rgba(27,85,166,.08); }
+.tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+.tech-card { background: var(--bg); padding: 28px; position: relative; overflow: hidden; }
+.tech-card-accent { position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
+.tc-a1 { background: var(--hanada); }
+.tc-a2 { background: var(--yamabuki); }
+.tc-a3 { background: var(--tokiwa); }
+.tc-layer { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+.tc-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.tc-desc { font-size: 13px; line-height: 1.7; color: var(--ink-mid); margin-bottom: 16px; }
+.tc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tctag { font-size: 10px; padding: 3px 8px; border-radius: 2px; background: rgba(27,85,166,.08); color: var(--hanada); }
+
+/* NAV BETWEEN PROJECTS */
+.proj-nav {
+  padding: 48px 56px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+  background: var(--ink);
+}
+.proj-nav-link {
+  padding: 32px; background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  transition: background .2s;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.proj-nav-link:hover { background: rgba(255,255,255,.07); }
+.pnl-dir { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+.pnl-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: #fff; }
+.pnl-arrow { font-size: 20px; color: var(--yamabuki); }
+.proj-nav-link.next { text-align: right; align-items: flex-end; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* FOOTER */
+footer { background: var(--ink); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; }
+.f-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,.35); }
+.f-copy { font-size: 12px; color: rgba(255,255,255,.2); letter-spacing: .06em; }
+.f-dots { display: flex; gap: 6px; }
+.fdot { width: 9px; height: 9px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="Portfolio.html">Alex<span>.</span></a></div>
+  <ul class="nav-links">
+    <li><a href="Portfolio.html#about">About</a></li>
+    <li><a href="Portfolio.html#experience">Experience</a></li>
+    <li><a href="All Projects.html">Projects</a></li>
+    <li><a href="Portfolio.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PROJECT HERO -->
+<div class="proj-hero">
+  <a href="All Projects.html" class="proj-hero-back">← All Projects</a>
+  <div class="proj-hero-left">
+    <div class="proj-type">Web Application · 2023</div>
+    <h1 class="proj-hero-title">Finance<br>Dashboard</h1>
+    <p class="proj-hero-desc">A real-time multi-account financial tracker with intelligent categorization, budget forecasting, and live WebSocket updates — built for scale.</p>
+    <div class="proj-hero-actions">
+      <a href="#" class="btn-primary">Live Demo ↗</a>
+      <a href="#" class="btn-outline-dark">GitHub</a>
+    </div>
+  </div>
+  <div class="proj-hero-meta">
+    <div class="meta-card">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-val">Lead Full Stack Engineer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Timeline</div>
+        <div class="meta-val">6 months</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Stack</div>
+        <div class="meta-tags">
+          <span class="mtag">React</span><span class="mtag">Go</span><span class="mtag">PostgreSQL</span>
+          <span class="mtag">Redis</span><span class="mtag">WebSockets</span><span class="mtag">Docker</span>
+        </div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Active Users</div>
+        <div class="meta-stat">50K+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOCKUP -->
+<div class="proj-mockup-section">
+  <div class="proj-mockup-main">
+    <span>[ main app screenshot ]<br>1600 × 900 px ideal</span>
+  </div>
+  <div class="proj-mockup-thumbs">
+    <div class="proj-thumb"><span>[ dashboard view ]</span></div>
+    <div class="proj-thumb"><span>[ transactions list ]</span></div>
+    <div class="proj-thumb"><span>[ budget charts ]</span></div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics-section">
+  <div class="metric">
+    <div class="metric-num">68<span class="metric-unit">%</span></div>
+    <div class="metric-label">Faster API response times after optimization</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">50<span class="metric-unit">K</span></div>
+    <div class="metric-label">Monthly active users at launch</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">99<span class="metric-unit">.</span>9</div>
+    <div class="metric-label">% uptime over 12 months in production</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">&lt;80<span class="metric-unit">ms</span></div>
+    <div class="metric-label">P95 latency for all dashboard queries</div>
+  </div>
+</div>
+
+<!-- BODY CONTENT -->
+<div class="proj-body">
+  <div class="proj-body-grid reveal">
+    <div class="content-block">
+      <div class="cb-label">The Problem</div>
+      <h3 class="cb-h3">Scattered accounts, no single source of truth.</h3>
+      <p class="cb-body">Users were managing money across 5+ bank accounts and investment platforms, copying data into spreadsheets manually — a process prone to error and hours of wasted time each month.</p>
+      <p class="cb-body">Existing tools either required expensive subscriptions, felt cluttered, or had no real-time data — they were snapshots, not live views.</p>
+    </div>
+    <div class="content-block">
+      <div class="cb-label">The Approach</div>
+      <h3 class="cb-h3">Real-time sync, intelligent defaults.</h3>
+      <p class="cb-body">I designed a microservices backend in Go that aggregates data from multiple financial APIs, normalizes it, and pushes live updates to the client via WebSocket connections. Each user's session maintains a dedicated stream.</p>
+      <p class="cb-body">The frontend was built in React with a tight focus on data density — showing the right numbers at a glance without overwhelming the user.</p>
+    </div>
+  </div>
+
+  <div class="highlight-block reveal">
+    "The hardest part wasn't building the real-time pipeline — it was designing the data model to handle the wild inconsistencies between different banks' APIs."
+  </div>
+
+  <div class="proj-body-grid reveal">
+    <div class="content-block">
+      <div class="cb-label">Key Challenges</div>
+      <h3 class="cb-h3">Scale without sacrificing speed.</h3>
+      <p class="cb-body">At 50K users, naive database queries became the bottleneck. I introduced a multi-layer caching strategy: hot user data lives in Redis with a 30-second TTL, and a read replica handles historical queries.</p>
+      <p class="cb-body">WebSocket connections are managed by a stateless Go service with Redis pub/sub as the message broker — this makes horizontal scaling straightforward.</p>
+    </div>
+    <div class="content-block">
+      <div class="cb-label">What I Learned</div>
+      <h3 class="cb-h3">Latency is a product decision.</h3>
+      <p class="cb-body">I shipped the MVP with synchronous data fetching on each page load. Users complained it felt slow even at 800ms. Switching to optimistic UI and background refresh made the app feel instant — even though the data took the same amount of time to arrive.</p>
+      <p class="cb-body">Perceived performance matters as much as measured performance.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TECH DEEP DIVE -->
+<div class="tech-section reveal">
+  <div class="cb-label">Technical Architecture</div>
+  <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:36px;color:var(--ink);margin-bottom:8px;">How it's built.</h2>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-card-accent tc-a1"></div>
+      <div class="tc-layer">Frontend</div>
+      <div class="tc-title">React + TypeScript</div>
+      <p class="tc-desc">Component-driven UI with React Query for server state, Zustand for client state, and Recharts for financial data visualization.</p>
+      <div class="tc-tags"><span class="tctag">React 18</span><span class="tctag">TypeScript</span><span class="tctag">Recharts</span><span class="tctag">Zustand</span></div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-card-accent tc-a2"></div>
+      <div class="tc-layer">Backend</div>
+      <div class="tc-title">Go Microservices</div>
+      <p class="tc-desc">Three Go services: API gateway, data aggregator, and WebSocket hub. Communication over gRPC internally, REST externally.</p>
+      <div class="tc-tags"><span class="tctag">Go</span><span class="tctag">gRPC</span><span class="tctag">WebSockets</span><span class="tctag">Redis</span></div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-card-accent tc-a3"></div>
+      <div class="tc-layer">Infra</div>
+      <div class="tc-title">AWS + Docker</div>
+      <p class="tc-desc">Containerized services on ECS Fargate. RDS PostgreSQL with a read replica. CloudFront for static assets. Deployed via GitHub Actions CI/CD.</p>
+      <div class="tc-tags"><span class="tctag">AWS ECS</span><span class="tctag">Docker</span><span class="tctag">RDS</span><span class="tctag">CloudFront</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="proj-nav">
+  <a href="Project Detail.html" class="proj-nav-link">
+    <div class="pnl-dir">← Previous</div>
+    <div class="pnl-title">API Mocking Platform</div>
+    <div class="pnl-arrow">←</div>
+  </a>
+  <a href="Project Detail.html" class="proj-nav-link next">
+    <div class="pnl-dir">Next →</div>
+    <div class="pnl-title">Headless CMS</div>
+    <div class="pnl-arrow">→</div>
+  </a>
+</div>
+
+<footer>
+  <div class="f-logo"><a href="Portfolio.html">Alex Chen</a></div>
+  <div class="f-copy">© 2026 — Built with care.</div>
+  <div class="f-dots">
+    <div class="fdot" style="background:var(--hanada)"></div>
+    <div class="fdot" style="background:var(--yamabuki)"></div>
+    <div class="fdot" style="background:var(--tokiwa)"></div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
