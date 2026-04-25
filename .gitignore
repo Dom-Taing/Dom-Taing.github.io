@@ -11,6 +11,9 @@
 
 
 
+# worktrees
+.worktrees/
+
 # misc
 .DS_Store
 .env.local
