@@ -4,13 +4,13 @@ export const personal: Personal = {
   name: 'Dom Taing',
   title: 'Full Stack Developer',
   tagline: 'I build fast, beautiful web applications — end to end.',
-  location: 'Your City, Country',
-  timezone: 'Your timezone',
+  location: 'Seattle, Washington',
+  timezone: 'PST (UTC−8)',
   availability: 'Open to opportunities',
   email: 'chonodom@gmail.com',
   github: 'https://github.com/Dom-Taing',
-  linkedin: 'https://linkedin.com/in/',
-  resumeUrl: '#',
+  linkedin: 'https://www.linkedin.com/in/keochonodom-taing/',
+  resumeUrl: 'https://www.linkedin.com/in/keochonodom-taing/',
 }
 
 export const stats: Stat[] = [
