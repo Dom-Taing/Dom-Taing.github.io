@@ -1,6 +1,6 @@
 export default function ProjectContent({ problem, approach }: { problem: string; approach: string }) {
   return (
-    <section className="px-14 py-[100px] grid gap-20 border-t border-hanada/[0.08]" style={{ gridTemplateColumns: '1fr 1fr' }}>
+    <section className="px-14 py-[100px] grid gap-20 border-t border-[rgba(27,85,166,0.08)]" style={{ gridTemplateColumns: '1fr 1fr' }}>
       {[
         { title: 'The Problem', body: problem },
         { title: 'The Approach', body: approach },

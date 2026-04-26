@@ -19,11 +19,11 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden px-14 py-[100px] border-t border-hanada/10"
-      style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '80px' }}
+      className="relative overflow-hidden px-14 py-[100px] border-t border-[rgba(27,85,166,0.10)]"
+      style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '80px', alignItems: 'start' }}
     >
       {/* Section number */}
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-hanada/[0.06] absolute top-[-20px] left-10 pointer-events-none select-none">
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(27,85,166,0.06)] absolute top-[-20px] left-10 pointer-events-none select-none">
         01
       </span>
 
@@ -124,7 +124,7 @@ export default function About() {
         viewport={{ once: true, amount: 0.1 }}
       >
         {/* Portrait placeholder */}
-        <div className="relative w-40 h-40 bg-bg-warm border border-dashed border-hanada/20 rounded-md mb-6 overflow-hidden flex items-center justify-center flex-shrink-0">
+        <div className="relative w-40 h-40 bg-bg-warm border border-dashed border-[rgba(27,85,166,0.20)] rounded-md mb-6 overflow-hidden flex items-center justify-center flex-shrink-0">
           <div
             className="absolute inset-0"
             style={{ background: 'repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(27,85,166,0.04) 18px, rgba(27,85,166,0.04) 19px)' }}
@@ -141,7 +141,7 @@ export default function About() {
         ].map((row, i) => (
           <div
             key={row.label}
-            className={`py-3.5 flex flex-col gap-[3px] border-b border-hanada/[0.08] ${i === 0 ? 'border-t border-hanada/[0.08]' : ''}`}
+            className={`py-3.5 flex flex-col gap-[3px] border-b border-[rgba(27,85,166,0.08)] ${i === 0 ? 'border-t border-[rgba(27,85,166,0.08)]' : ''}`}
           >
             <div className="text-[9px] tracking-[0.2em] uppercase text-ink-soft">{row.label}</div>
             <div className="text-[14px] text-ink font-medium flex items-center">
@@ -168,7 +168,7 @@ export default function About() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada flex items-center justify-between border-b border-hanada/[0.12] pb-2.5 hover:text-yamabuki transition-colors"
+              className="text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada flex items-center justify-between border-b border-[rgba(27,85,166,0.12)] pb-2.5 hover:text-yamabuki transition-colors"
             >
               <span>{link.label}</span><span>&#8599;</span>
             </a>

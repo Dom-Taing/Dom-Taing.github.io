@@ -8,8 +8,8 @@ export default function Experience() {
   const [active, setActive] = useState(0)
 
   return (
-    <section id="experience" className="relative overflow-hidden px-14 py-[100px] bg-bg border-t border-hanada/[0.08]">
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-hanada/[0.06] absolute top-[-20px] left-10 pointer-events-none select-none">
+    <section id="experience" className="relative overflow-hidden px-14 py-[100px] bg-bg border-t border-[rgba(27,85,166,0.08)]">
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(27,85,166,0.06)] absolute top-[-20px] left-10 pointer-events-none select-none">
         02
       </span>
 
@@ -37,13 +37,13 @@ export default function Experience() {
               <button
                 key={exp.company}
                 onClick={() => setActive(i)}
-                className={`flex items-center gap-3.5 w-full text-left py-3.5 border-b border-hanada/[0.08] transition-colors ${
+                className={`flex items-center gap-3.5 w-full text-left py-3.5 border-b border-[rgba(27,85,166,0.08)] transition-colors ${
                   active === i ? 'text-hanada' : 'text-ink-soft hover:text-hanada'
                 }`}
               >
                 <div
                   className={`w-2 h-2 rounded-full flex-shrink-0 transition-colors duration-200 ${
-                    active === i ? 'bg-yamabuki' : 'bg-hanada/20'
+                    active === i ? 'bg-yamabuki' : 'bg-[rgba(27,85,166,0.20)]'
                   }`}
                 />
                 <div>
@@ -56,7 +56,7 @@ export default function Experience() {
         </div>
 
         {/* Entries */}
-        <div className="pl-14 border-l border-hanada/10">
+        <div className="pl-14 border-l border-[rgba(27,85,166,0.10)]">
           {experience.map((exp, i) => (
             <div
               key={exp.company}
@@ -69,7 +69,7 @@ export default function Experience() {
               <p className="text-[15px] leading-[1.8] text-ink-mid mb-5">{exp.description}</p>
               <div className="flex flex-wrap gap-2">
                 {exp.tags.map((tag) => (
-                  <span key={tag} className="text-[11px] px-2.5 py-1 rounded-sm border border-hanada/15 text-ink-mid tracking-[0.05em]">
+                  <span key={tag} className="text-[11px] px-2.5 py-1 rounded-sm border border-[rgba(27,85,166,0.15)] text-ink-mid tracking-[0.05em]">
                     {tag}
                   </span>
                 ))}

@@ -63,7 +63,7 @@ function ProjectCard({
         <p className="text-[14px] leading-[1.8] text-ink-mid mb-[22px]">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-7">
           {project.tech.map((t) => (
-            <span key={t} className="text-[11px] px-2.5 py-1 rounded-sm bg-hanada/[0.08] text-hanada font-medium tracking-[0.05em]">
+            <span key={t} className="text-[11px] px-2.5 py-1 rounded-sm bg-[rgba(27,85,166,0.08)] text-hanada font-medium tracking-[0.05em]">
               {t}
             </span>
           ))}
@@ -92,7 +92,7 @@ function ProjectCard({
       </div>
 
       {wide && (
-        <div className="aspect-[16/10] bg-bg-warm border border-dashed border-hanada/[0.18] flex items-center justify-center relative overflow-hidden">
+        <div className="aspect-[16/10] bg-bg-warm border border-dashed border-[rgba(27,85,166,0.18)] flex items-center justify-center relative overflow-hidden">
           <div
             className="absolute inset-0"
             style={{ background: 'repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(27,85,166,0.04) 16px, rgba(27,85,166,0.04) 17px)' }}
@@ -110,8 +110,8 @@ export default function FeaturedProjects() {
   const [first, ...rest] = displayProjects
 
   return (
-    <section id="projects" className="relative bg-bg-warm px-14 py-[100px] border-t border-hanada/[0.08] overflow-hidden">
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-hanada/[0.06] absolute top-[-20px] left-10 pointer-events-none select-none">
+    <section id="projects" className="relative bg-bg-warm px-14 py-[100px] border-t border-[rgba(27,85,166,0.08)] overflow-hidden">
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(27,85,166,0.06)] absolute top-[-20px] left-10 pointer-events-none select-none">
         03
       </span>
 

@@ -53,7 +53,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
       <p className="text-[13px] leading-[1.8] text-ink-mid mb-5">{project.description}</p>
       <div className="flex flex-wrap gap-2 mb-6">
         {project.tech.map((t) => (
-          <span key={t} className="text-[11px] px-2.5 py-1 rounded-sm bg-hanada/[0.08] text-hanada font-medium tracking-[0.05em]">
+          <span key={t} className="text-[11px] px-2.5 py-1 rounded-sm bg-[rgba(27,85,166,0.08)] text-hanada font-medium tracking-[0.05em]">
             {t}
           </span>
         ))}

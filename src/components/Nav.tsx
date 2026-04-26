@@ -10,7 +10,7 @@ export default function Nav() {
         <li><a href="#about" className="text-[12px] font-medium tracking-[0.12em] uppercase text-white/50 hover:text-white transition-colors">About</a></li>
         <li><a href="#experience" className="text-[12px] font-medium tracking-[0.12em] uppercase text-white/50 hover:text-white transition-colors">Experience</a></li>
         <li><a href="/projects" className="text-[12px] font-medium tracking-[0.12em] uppercase text-white/50 hover:text-white transition-colors">Projects</a></li>
-        <li><a href="#contact" className="text-[12px] font-semibold tracking-[0.12em] uppercase bg-yamabuki text-ink px-[22px] py-2 rounded-sm hover:bg-[#b8881a] transition-colors">Contact</a></li>
+        <li><a href="#contact" className="text-[12px] font-semibold tracking-[0.12em] uppercase bg-yamabuki text-ink px-[22px] py-2 rounded-sm hover:bg-[#e09518] transition-colors">Contact</a></li>
       </ul>
     </nav>
   )
