@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  /* Japanese palette */
+  --color-hanada:   #1d5c3a;
+  --color-yamabuki: #d4a020;
+  --color-tokiwa:   #2a7a5a;
+  --color-bg:       #f4f2eb;
+  --color-bg-warm:  #e6e2d4;
+  --color-ink:      #131a14;
+  --color-ink-mid:  #445048;
+  --color-ink-soft: #889088;
+  --color-hero-bg:  #0c1410;
+
+  /* Font families (CSS variables set by next/font/google in layout.tsx) */
+  --font-family-shippori: var(--font-shippori), serif;
+  --font-family-serif:    var(--font-dm-serif), serif;
+  --font-family-sans:     var(--font-dm-sans), sans-serif;
+}
+
+/* CSS custom properties for JS-driven inline styles */
+:root {
+  --hanada:    #1d5c3a;
+  --yamabuki:  #d4a020;
+  --tokiwa:    #2a7a5a;
+  --bg:        #f4f2eb;
+  --bg-warm:   #e6e2d4;
+  --ink:       #131a14;
+  --ink-mid:   #445048;
+  --ink-soft:  #889088;
+  --hero-bg:   #0c1410;
+  --nav-height: 64px;
+}
+
+/*
+  All base rules must be in @layer base so that @layer utilities can override them.
+  In Tailwind v4, unlayered CSS beats layered utilities — wrapping here fixes that.
+*/
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.7; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
