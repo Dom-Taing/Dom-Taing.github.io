@@ -127,7 +127,7 @@ export default function About() {
         <div className="relative w-full aspect-square rounded-md mb-6 overflow-hidden flex-shrink-0 mx-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/profile.JPG"
+            src="/profile.jpg"
             alt="Dom Taing"
             className="w-full h-full object-cover object-top"
           />
