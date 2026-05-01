@@ -19,17 +19,17 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden px-14 py-[100px] border-t border-[rgba(27,85,166,0.10)]"
+      className="relative overflow-hidden px-14 py-[100px] border-t border-[rgba(29,92,58,0.18)]"
       style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '80px', alignItems: 'start' }}
     >
       {/* Section number */}
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(27,85,166,0.06)] absolute top-[-20px] left-10 pointer-events-none select-none">
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none">
         01
       </span>
 
       {/* Main content */}
       <div>
-        <div className="flex items-center gap-2.5 text-[10px] tracking-[0.22em] uppercase text-ink-soft mb-3.5">
+        <div className="flex items-center gap-2.5 text-[10px] tracking-[0.22em] uppercase text-tokiwa mb-3.5">
           <span className="w-5 h-px bg-current inline-block" />
           About Me
         </div>
@@ -46,7 +46,7 @@ export default function About() {
         </motion.h2>
 
         <motion.blockquote
-          className="font-serif italic text-[21px] text-ink leading-[1.5] border-l-[3px] border-yamabuki pl-5 mb-10"
+          className="font-serif italic text-[21px] text-ink leading-[1.5] border-l-[3px] border-hanada pl-5 mb-10"
           variants={reveal}
           initial="hidden"
           whileInView="visible"
@@ -77,7 +77,7 @@ export default function About() {
         >
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="font-shippori font-extrabold text-[52px] text-hanada leading-none">{s.number}</div>
+              <div className="font-shippori font-extrabold text-[52px] text-tokiwa leading-none">{s.number}</div>
               <div className="text-[12px] text-ink-soft tracking-[0.06em] mt-0.5">{s.label}</div>
             </div>
           ))}
@@ -124,10 +124,10 @@ export default function About() {
         viewport={{ once: true, amount: 0.1 }}
       >
         {/* Portrait placeholder */}
-        <div className="relative w-40 h-40 bg-bg-warm border border-dashed border-[rgba(27,85,166,0.20)] rounded-md mb-6 overflow-hidden flex items-center justify-center flex-shrink-0">
+        <div className="relative w-40 h-40 bg-bg-warm border border-dashed border-[rgba(29,92,58,0.20)] rounded-md mb-6 overflow-hidden flex items-center justify-center flex-shrink-0">
           <div
             className="absolute inset-0"
-            style={{ background: 'repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(27,85,166,0.04) 18px, rgba(27,85,166,0.04) 19px)' }}
+            style={{ background: 'repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(29,92,58,0.04) 18px, rgba(29,92,58,0.04) 19px)' }}
           />
           <span className="relative z-10 text-[10px] font-mono text-ink-soft text-center leading-[1.6]">[ portrait ]<br />160&times;160</span>
         </div>
@@ -141,7 +141,7 @@ export default function About() {
         ].map((row, i) => (
           <div
             key={row.label}
-            className={`py-3.5 flex flex-col gap-[3px] border-b border-[rgba(27,85,166,0.08)] ${i === 0 ? 'border-t border-[rgba(27,85,166,0.08)]' : ''}`}
+            className={`py-3.5 flex flex-col gap-[3px] border-b border-[rgba(29,92,58,0.12)] ${i === 0 ? 'border-t border-[rgba(29,92,58,0.12)]' : ''}`}
           >
             <div className="text-[9px] tracking-[0.2em] uppercase text-ink-soft">{row.label}</div>
             <div className="text-[14px] text-ink font-medium flex items-center">
@@ -168,7 +168,7 @@ export default function About() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada flex items-center justify-between border-b border-[rgba(27,85,166,0.12)] pb-2.5 hover:text-yamabuki transition-colors"
+              className="text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada flex items-center justify-between border-b border-[rgba(29,92,58,0.18)] pb-2.5 hover:text-yamabuki transition-colors"
             >
               <span>{link.label}</span><span>&#8599;</span>
             </a>

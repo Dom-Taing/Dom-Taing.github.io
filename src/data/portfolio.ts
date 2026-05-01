@@ -36,18 +36,11 @@ export const skills: SkillGroup[] = [
 
 export const experience: ExperienceEntry[] = [
   {
-    company: 'Valora Infotech',
-    role: 'Node.js Backend Developer',
-    period: 'Oct 2020 — Dec 2022',
-    description: 'Built and maintained admin panel backend and a gambling application. Worked with WebSocket, payment gateway integration, and gaming systems. Stack was primarily PERN and MERN. 80% backend, 20% DevOps.',
-    tags: ['Node.js', 'PostgreSQL', 'MongoDB', 'WebSocket', 'Express'],
-  },
-  {
-    company: 'NightOwls',
-    role: 'Full Stack Developer (Freelance)',
-    period: 'Sep 2020 — Oct 2020',
-    description: 'Client-facing development on LAMP stack. 40% backend, 30% database schema design, 30% hosting and traffic management.',
-    tags: ['PHP', 'MySQL', 'Apache', 'Linux'],
+    company: 'Walmart',
+    role: 'Software Engineer III · Contract',
+    period: 'Mar 2023 — Present',
+    description: 'Contributed to Walmart Creator, a platform serving 800K+ creators and 50K+ storefronts. Led full-stack development across three core systems: Storefront publishing (co-led an architecture redesign that cut publish time from 30 minutes to instant), Affiliate Links (built the generation API across storefronts, collections, and shoppable posts — optimized response time from 300ms to near-zero), and the Marty AI Chatbot (designed system architecture, built the MFE-based UI with Webpack Module Federation, and implemented LangChain agents for creator Q&A).',
+    tags: ['Next.js', 'Node.js', 'Directus', 'LangChain', 'Module Federation', 'REST APIs'],
   },
 ]
 

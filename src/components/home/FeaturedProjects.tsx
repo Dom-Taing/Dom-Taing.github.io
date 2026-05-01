@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { projects } from '@/data/portfolio'
 import type { Project } from '@/types'
 
-const accentColors = ['bg-hanada', 'bg-yamabuki', 'bg-tokiwa']
+const accentColors = ['bg-hanada', 'bg-tokiwa', 'bg-yamabuki']
 
 function ProjectCard({
   project,
@@ -26,7 +26,7 @@ function ProjectCard({
     const x = (e.clientX - r.left) / r.width - 0.5
     const y = (e.clientY - r.top) / r.height - 0.5
     card.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg) translateZ(8px)`
-    card.style.boxShadow = `${-x * 18}px ${-y * 18}px 36px rgba(27,85,166,0.1)`
+    card.style.boxShadow = `${-x * 18}px ${-y * 18}px 36px rgba(29,92,58,0.1)`
   }
 
   const handleMouseLeave = () => {
@@ -63,7 +63,7 @@ function ProjectCard({
         <p className="text-[14px] leading-[1.8] text-ink-mid mb-[22px]">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-7">
           {project.tech.map((t) => (
-            <span key={t} className="text-[11px] px-2.5 py-1 rounded-sm bg-[rgba(27,85,166,0.08)] text-hanada font-medium tracking-[0.05em]">
+            <span key={t} className="text-[11px] px-2.5 py-1 rounded-sm bg-[rgba(29,92,58,0.09)] text-hanada font-medium tracking-[0.05em]">
               {t}
             </span>
           ))}
@@ -72,7 +72,7 @@ function ProjectCard({
           {project.detail && (
             <Link
               href={`/projects/${project.slug}`}
-              className="text-[11px] font-semibold tracking-[0.14em] uppercase text-hanada border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors"
+              className="text-[11px] font-semibold tracking-[0.14em] uppercase text-tokiwa border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors"
             >
               Case Study
             </Link>
@@ -83,7 +83,7 @@ function ProjectCard({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-semibold tracking-[0.14em] uppercase text-hanada border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors"
+              className="text-[11px] font-semibold tracking-[0.14em] uppercase text-tokiwa border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors"
             >
               {link.label}
             </a>
@@ -92,10 +92,10 @@ function ProjectCard({
       </div>
 
       {wide && (
-        <div className="aspect-[16/10] bg-bg-warm border border-dashed border-[rgba(27,85,166,0.18)] flex items-center justify-center relative overflow-hidden">
+        <div className="aspect-[16/10] bg-bg-warm border border-dashed border-[rgba(29,92,58,0.18)] flex items-center justify-center relative overflow-hidden">
           <div
             className="absolute inset-0"
-            style={{ background: 'repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(27,85,166,0.04) 16px, rgba(27,85,166,0.04) 17px)' }}
+            style={{ background: 'repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(29,92,58,0.04) 16px, rgba(29,92,58,0.04) 17px)' }}
           />
           <span className="relative z-10 text-[11px] font-mono text-ink-soft text-center leading-[1.6]">[ screenshot ]<br />16:10</span>
         </div>
@@ -110,14 +110,14 @@ export default function FeaturedProjects() {
   const [first, ...rest] = displayProjects
 
   return (
-    <section id="projects" className="relative bg-bg-warm px-14 py-[100px] border-t border-[rgba(27,85,166,0.08)] overflow-hidden">
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(27,85,166,0.06)] absolute top-[-20px] left-10 pointer-events-none select-none">
+    <section id="projects" className="relative bg-bg-warm px-14 py-[100px] border-t border-[rgba(29,92,58,0.15)] overflow-hidden">
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none">
         03
       </span>
 
       <div className="flex items-end justify-between mb-14">
         <div>
-          <div className="flex items-center gap-2.5 text-[10px] tracking-[0.22em] uppercase text-ink-soft mb-3.5">
+          <div className="flex items-center gap-2.5 text-[10px] tracking-[0.22em] uppercase text-tokiwa mb-3.5">
             <span className="w-5 h-px bg-current inline-block" />
             Featured Projects
           </div>
@@ -134,7 +134,7 @@ export default function FeaturedProjects() {
         </div>
         <Link
           href="/projects"
-          className="text-[12px] font-semibold tracking-[0.12em] uppercase text-hanada border-b border-current pb-0.5 mb-1.5 hover:text-yamabuki hover:border-yamabuki transition-colors whitespace-nowrap"
+          className="text-[12px] font-semibold tracking-[0.12em] uppercase text-tokiwa border-b border-current pb-0.5 mb-1.5 hover:text-yamabuki hover:border-yamabuki transition-colors whitespace-nowrap"
         >
           All Projects →
         </Link>

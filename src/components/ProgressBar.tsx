@@ -16,8 +16,8 @@ export default function ProgressBar() {
 
   return (
     <div
-      className="fixed top-16 left-0 z-[300] h-[2px] bg-yamabuki pointer-events-none transition-[width] duration-[80ms] linear"
-      style={{ width: `${width}%` }}
+      className="fixed top-16 left-0 z-[300] h-[2px] pointer-events-none transition-[width] duration-[80ms] linear"
+      style={{ width: `${width}%`, background: 'linear-gradient(to right, var(--hanada), var(--tokiwa))' }}
     />
   )
 }
