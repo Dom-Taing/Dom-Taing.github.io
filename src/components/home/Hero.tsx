@@ -94,7 +94,7 @@ export default function Hero() {
         <div className="overflow-hidden">
           <motion.div className="flex items-center gap-6" {...dropIn(0.65)}>
             <a
-              href="#projects"
+              href="#experience"
               className="bg-yamabuki text-ink px-9 py-3.5 font-bold text-[12px] tracking-[0.14em] uppercase rounded-sm hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(212,160,32,0.35)] transition-all"
             >
               View Work

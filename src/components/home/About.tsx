@@ -20,7 +20,7 @@ export default function About() {
     <section
       id="about"
       className="relative overflow-hidden px-14 py-[100px] border-t border-[rgba(29,92,58,0.18)]"
-      style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '80px', alignItems: 'start' }}
+      style={{ display: 'grid', gridTemplateColumns: '4fr 1fr', gap: '80px', alignItems: 'start' }}
     >
       {/* Section number */}
       <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none">
@@ -123,13 +123,14 @@ export default function About() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
-        {/* Portrait placeholder */}
-        <div className="relative w-40 h-40 bg-bg-warm border border-dashed border-[rgba(29,92,58,0.20)] rounded-md mb-6 overflow-hidden flex items-center justify-center flex-shrink-0">
-          <div
-            className="absolute inset-0"
-            style={{ background: 'repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(29,92,58,0.04) 18px, rgba(29,92,58,0.04) 19px)' }}
+        {/* Portrait */}
+        <div className="relative w-full aspect-square rounded-md mb-6 overflow-hidden flex-shrink-0 mx-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/profile.JPG"
+            alt="Dom Taing"
+            className="w-full h-full object-cover object-top"
           />
-          <span className="relative z-10 text-[10px] font-mono text-ink-soft text-center leading-[1.6]">[ portrait ]<br />160&times;160</span>
         </div>
 
         {/* Info rows */}

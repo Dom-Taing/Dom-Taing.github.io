@@ -1,4 +1,4 @@
-export type SkillCategory = 'Frontend' | 'Backend' | 'Infra' | 'Other'
+export type SkillCategory = 'Frontend' | 'Backend' | 'AI/ML' | 'Hardware' | 'Infra' | 'Other'
 
 export interface Stat {
   number: string
@@ -25,18 +25,29 @@ export interface ProjectLink {
 
 export interface ProjectDetail {
   problem: string
-  approach: string
+  approach?: string
+  pullQuote?: string
+  role?: string
+  team?: string
+  timeline?: string
   metrics: Stat[]
   stack: Array<{ layer: string; items: string[] }>
   screenshots: string[]
+  screenshotStyle?: 'cover' | 'contain'
 }
 
 export interface Project {
   slug: string
   title: string
+  tagline?: string
+  year?: string
   description: string
   type: 'web' | 'other'
   featured: boolean
+  hidden?: boolean
+  heroVideo?: string
+  heroYouTube?: string
+  heroIllustration?: 'waveform'
   tech: string[]
   links: ProjectLink[]
   detail?: ProjectDetail

@@ -1,57 +1,83 @@
 import type { Project } from '@/types'
 
 export default function ProjectHero({ project }: { project: Project }) {
+  const hasStats = (project.detail?.metrics.length ?? 0) > 0
+
   return (
-    <div
-      className="relative px-14 py-[120px] bg-hero-bg overflow-hidden grid items-start gap-20"
-      style={{ gridTemplateColumns: '1fr 340px' }}
-    >
+    <div className="relative px-14 pb-20 pt-[130px] bg-hero-bg overflow-hidden">
+      {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)',
           backgroundSize: '32px 32px',
         }}
       />
-      <div className="relative z-10">
-        <a href="/projects" className="text-[11px] tracking-[0.18em] uppercase text-white/35 hover:text-white/70 transition-colors mb-8 inline-block">
-          ← All Projects
-        </a>
-        <h1
-          className="font-shippori font-extrabold text-white leading-[0.95] mb-6"
-          style={{ fontSize: 'clamp(48px, 6vw, 88px)' }}
-        >
-          {project.title}
-        </h1>
-        <p className="text-[16px] text-white/55 leading-[1.8] max-w-[520px]">{project.description}</p>
+      {/* Right glow */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          right: -100, top: -100, width: 600, height: 500, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(29,92,58,0.15) 0%, transparent 70%)',
+        }}
+      />
+      {/* Bottom accent line */}
+      <div
+        className="absolute left-0 bottom-0 w-full h-[3px] pointer-events-none"
+        style={{ background: 'linear-gradient(to right, var(--hanada) 0%, var(--tokiwa) 40%, transparent 70%)' }}
+      />
+
+      {/* Back link */}
+      <a
+        href="/projects"
+        className="relative z-10 inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.14em] uppercase text-white/35 hover:text-white/80 transition-colors border-b border-white/[0.12] pb-px mb-10"
+      >
+        ← All Projects
+      </a>
+
+      {/* Meta: type + year */}
+      <div className="relative z-10 flex items-center gap-4 mb-5">
+        <span className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-tokiwa font-semibold">
+          <span className="w-5 h-px bg-current inline-block" />
+          {project.type === 'web' ? 'Web App' : 'Other'}
+        </span>
+        {project.year && (
+          <>
+            <span className="w-px h-3 bg-white/15 inline-block" />
+            <span className="text-[10px] tracking-[0.16em] uppercase text-white/25 font-medium">{project.year}</span>
+          </>
+        )}
       </div>
-      <div className="relative z-10 bg-white/[0.04] border border-white/[0.08] rounded-md p-8 mt-8">
-        <div className="text-[10px] tracking-[0.18em] uppercase text-white/30 mb-5">Project Info</div>
-        <div className="flex flex-col gap-0">
-          {[
-            { label: 'Type', value: project.type === 'web' ? 'Web Application' : 'Other' },
-            { label: 'Stack', value: project.tech.join(', ') },
-          ].map((row) => (
-            <div key={row.label} className="py-3 border-b border-white/[0.06]">
-              <div className="text-[10px] uppercase tracking-[0.15em] text-white/30 mb-1">{row.label}</div>
-              <div className="text-[13px] text-white/70">{row.value}</div>
+
+      {/* Title */}
+      <h1
+        className="relative z-10 font-shippori font-extrabold text-white leading-[0.94] tracking-[-0.01em] mb-6"
+        style={{ fontSize: 'clamp(48px, 7vw, 100px)' }}
+      >
+        {project.title}<span className="text-yamabuki">.</span>
+      </h1>
+
+      {/* Tagline */}
+      <p
+        className="relative z-10 font-serif italic text-white/50 max-w-[600px] leading-[1.5] mb-10"
+        style={{ fontSize: 'clamp(16px, 1.5vw, 21px)' }}
+      >
+        {project.tagline ?? project.description}
+      </p>
+
+      {/* Stats row */}
+      {hasStats && (
+        <div className="relative z-10 flex flex-wrap gap-10 pt-8 border-t border-white/[0.08]">
+          {project.detail!.metrics.map((m) => (
+            <div key={m.label}>
+              <div className="font-shippori font-extrabold text-tokiwa leading-none mb-1" style={{ fontSize: 36 }}>
+                {m.number}
+              </div>
+              <div className="text-[11px] text-white/30 tracking-[0.1em] uppercase">{m.label}</div>
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap gap-2 mt-5">
-          {project.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] font-semibold tracking-[0.12em] uppercase bg-yamabuki text-ink px-4 py-2 rounded-sm hover:bg-[#b8881a] transition-colors"
-            >
-              {link.label} ↗
-            </a>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   )
 }

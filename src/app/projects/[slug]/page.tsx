@@ -1,44 +1,54 @@
 import { notFound } from 'next/navigation'
 import { projects } from '@/data/portfolio'
+import Nav from '@/components/Nav'
 import ProjectHero from '@/components/project-detail/ProjectHero'
-import Metrics from '@/components/project-detail/Metrics'
+import HeroImage from '@/components/project-detail/HeroImage'
 import ProjectContent from '@/components/project-detail/ProjectContent'
+import Metrics from '@/components/project-detail/Metrics'
 import TechStack from '@/components/project-detail/TechStack'
+import ProjectSidebar from '@/components/project-detail/ProjectSidebar'
 import ProjectNav from '@/components/project-detail/ProjectNav'
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const project = projects.find((p) => p.slug === slug)
   return { title: project ? `${project.title} — Dom Taing` : 'Project' }
 }
 
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug)
+export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const project = projects.find((p) => p.slug === slug)
   if (!project) notFound()
 
+  const heroScreenshot = project.detail?.screenshots?.[0]
+  const hasMetrics = (project.detail?.metrics.length ?? 0) > 0
+
   return (
-    <main className="bg-bg pt-16">
-      <ProjectHero project={project} />
+    <main className="bg-bg">
+      <Nav />
+      <div className="pt-16">
+        <ProjectHero project={project} />
+        <HeroImage src={heroScreenshot} video={project.heroVideo} youTube={project.heroYouTube} illustration={project.heroIllustration} contain={project.detail?.screenshotStyle === 'contain'} />
 
-      {project.detail && (
-        <>
-          {project.detail.metrics.length > 0 && (
-            <Metrics metrics={project.detail.metrics} />
-          )}
-          <ProjectContent
-            problem={project.detail.problem}
-            approach={project.detail.approach}
-          />
-          {project.detail.stack.length > 0 && (
-            <TechStack stack={project.detail.stack} />
-          )}
-        </>
-      )}
+        {/* Content + sidebar */}
+        <div
+          className="px-14 py-20 items-start"
+          style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 80 }}
+        >
+          <div>
+            <ProjectContent project={project} />
+            {hasMetrics && <Metrics metrics={project.detail!.metrics} />}
+            <TechStack project={project} />
+          </div>
+          <ProjectSidebar project={project} />
+        </div>
 
-      <ProjectNav current={project} />
+        <ProjectNav current={project} />
+      </div>
     </main>
   )
 }

@@ -1,10 +1,12 @@
 'use client'
 
 import { useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { projects } from '@/data/portfolio'
 import type { Project } from '@/types'
+import WaveformIllustration from '@/components/WaveformIllustration'
 
 const accentColors = ['bg-hanada', 'bg-tokiwa', 'bg-yamabuki']
 
@@ -17,37 +19,49 @@ function ProjectCard({
   index: number
   wide?: boolean
 }) {
-  const cardRef = useRef<HTMLDivElement>(null)
+  const outerRef = useRef<HTMLDivElement>(null)
+  const tiltRef = useRef<HTMLDivElement>(null)
+  const rectRef = useRef<DOMRect | null>(null)
+  const router = useRouter()
+
+  const handleMouseEnter = () => {
+    rectRef.current = outerRef.current?.getBoundingClientRect() ?? null
+  }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = cardRef.current
-    if (!card) return
-    const r = card.getBoundingClientRect()
+    const tilt = tiltRef.current
+    const r = rectRef.current
+    if (!tilt || !r) return
     const x = (e.clientX - r.left) / r.width - 0.5
     const y = (e.clientY - r.top) / r.height - 0.5
-    card.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg) translateZ(8px)`
-    card.style.boxShadow = `${-x * 18}px ${-y * 18}px 36px rgba(29,92,58,0.1)`
+    tilt.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg) translateZ(8px)`
+    tilt.style.boxShadow = `${-x * 18}px ${-y * 18}px 36px rgba(29,92,58,0.1)`
   }
 
   const handleMouseLeave = () => {
-    const card = cardRef.current
-    if (!card) return
-    card.style.transform = ''
-    card.style.boxShadow = ''
+    const tilt = tiltRef.current
+    if (!tilt) return
+    tilt.style.transform = ''
+    tilt.style.boxShadow = ''
+    rectRef.current = null
   }
 
   return (
     <motion.div
-      ref={cardRef}
+      ref={outerRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.12 }}
-      className={`relative bg-bg hover:bg-white transition-colors p-11 overflow-hidden cursor-default [transform-style:preserve-3d] will-change-transform ${
-        wide ? 'col-span-2' : ''
-      }`}
+      onClick={() => router.push(`/projects/${project.slug}`)}
+      className={`cursor-pointer [transform-style:preserve-3d] ${wide ? 'col-span-2' : ''}`}
+    >
+    <div
+      ref={tiltRef}
+      className="relative bg-bg hover:bg-white transition-colors p-11 overflow-hidden [transform-style:preserve-3d] will-change-transform"
       style={wide ? { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' } : {}}
     >
       {/* Left accent bar */}
@@ -69,20 +83,16 @@ function ProjectCard({
           ))}
         </div>
         <div className="flex gap-5">
-          {project.detail && (
-            <Link
-              href={`/projects/${project.slug}`}
-              className="text-[11px] font-semibold tracking-[0.14em] uppercase text-tokiwa border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors"
-            >
-              Case Study
-            </Link>
-          )}
+          <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-tokiwa border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors">
+            View Details
+          </span>
           {project.links.map((link) => (
             <a
               key={link.label}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="text-[11px] font-semibold tracking-[0.14em] uppercase text-tokiwa border-b border-current pb-px hover:text-yamabuki hover:border-yamabuki transition-colors"
             >
               {link.label}
@@ -92,21 +102,37 @@ function ProjectCard({
       </div>
 
       {wide && (
-        <div className="aspect-[16/10] bg-bg-warm border border-dashed border-[rgba(29,92,58,0.18)] flex items-center justify-center relative overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{ background: 'repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(29,92,58,0.04) 16px, rgba(29,92,58,0.04) 17px)' }}
-          />
-          <span className="relative z-10 text-[11px] font-mono text-ink-soft text-center leading-[1.6]">[ screenshot ]<br />16:10</span>
+        <div className="aspect-[16/10] overflow-hidden">
+          {project.heroIllustration === 'waveform' ? (
+            <div className="w-full h-full" style={{ background: '#0b1410' }}>
+              <WaveformIllustration />
+            </div>
+          ) : project.detail?.screenshots?.[0] ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={project.detail.screenshots[0]}
+              alt=""
+              className={`w-full h-full ${project.detail.screenshotStyle === 'contain' ? 'object-contain p-6' : 'object-cover'}`}
+            />
+          ) : (
+            <div className="w-full h-full bg-bg-warm border border-dashed border-[rgba(29,92,58,0.18)] flex items-center justify-center relative">
+              <div
+                className="absolute inset-0"
+                style={{ background: 'repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(29,92,58,0.04) 16px, rgba(29,92,58,0.04) 17px)' }}
+              />
+              <span className="relative z-10 text-[11px] font-mono text-ink-soft text-center leading-[1.6]">[ screenshot ]<br />16:10</span>
+            </div>
+          )}
         </div>
       )}
+    </div>
     </motion.div>
   )
 }
 
 export default function FeaturedProjects() {
-  const featuredProjects = projects.filter((p) => p.featured)
-  const displayProjects = featuredProjects.length > 0 ? featuredProjects.slice(0, 3) : projects.slice(0, 3)
+  const featuredProjects = projects.filter((p) => p.featured && !p.hidden)
+  const displayProjects = featuredProjects.length > 0 ? featuredProjects.slice(0, 3) : projects.filter((p) => !p.hidden).slice(0, 3)
   const [first, ...rest] = displayProjects
 
   return (

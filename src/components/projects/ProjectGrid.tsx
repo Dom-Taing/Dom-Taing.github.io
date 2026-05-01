@@ -10,7 +10,8 @@ type Filter = 'all' | 'web' | 'other'
 export default function ProjectGrid() {
   const [filter, setFilter] = useState<Filter>('all')
 
-  const visible = filter === 'all' ? projects : projects.filter((p) => p.type === filter)
+  const active = projects.filter((p) => !p.hidden)
+  const visible = filter === 'all' ? active : active.filter((p) => p.type === filter)
 
   return (
     <>
