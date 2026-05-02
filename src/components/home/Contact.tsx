@@ -4,8 +4,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative bg-hanada overflow-hidden px-14 py-[100px] items-center"
-      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px' }}
+      className="relative bg-hanada overflow-hidden px-14 max-lg:px-8 max-mobile:px-5 py-[100px] max-lg:py-20 max-mobile:py-16 items-center grid grid-cols-2 max-lg:grid-cols-1 gap-20 max-lg:gap-12"
     >
       {/* Dot grid */}
       <div
@@ -16,9 +15,9 @@ export default function Contact() {
         }}
       />
 
-      {/* Decorative "HELLO." */}
+      {/* Decorative "HELLO." — hidden at tablet and below */}
       <div
-        className="font-shippori font-extrabold text-white/[0.05] absolute right-12 bottom-[-10px] leading-none pointer-events-none select-none"
+        className="font-shippori font-extrabold text-white/[0.05] absolute right-12 bottom-[-10px] leading-none pointer-events-none select-none max-lg:hidden"
         style={{ fontSize: 'clamp(72px, 7vw, 108px)' }}
       >
         HELLO.
@@ -32,7 +31,7 @@ export default function Contact() {
         </div>
         <h2
           className="font-serif text-white leading-[1.1] mb-5"
-          style={{ fontSize: 'clamp(34px, 4vw, 56px)' }}
+          style={{ fontSize: 'clamp(28px, 4vw, 56px)' }}
         >
           Let&apos;s build<br />something<br />together.
         </h2>
@@ -50,10 +49,10 @@ export default function Contact() {
       {/* Right */}
       <div className="relative z-10">
         {[
-          { label: personal.email, href: `mailto:${personal.email}` },
-          { label: 'GitHub — @Dom-Taing', href: personal.github },
-          { label: 'LinkedIn', href: personal.linkedin },
-          { label: 'Resume / CV', href: personal.resumeUrl },
+          { label: personal.email,           href: `mailto:${personal.email}` },
+          { label: 'GitHub — @Dom-Taing',    href: personal.github },
+          { label: 'LinkedIn',               href: personal.linkedin },
+          { label: 'Resume / CV',            href: personal.resumeUrl },
         ].map((link, i) => (
           <a
             key={link.label}

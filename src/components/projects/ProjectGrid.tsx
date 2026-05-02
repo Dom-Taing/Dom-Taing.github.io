@@ -16,7 +16,7 @@ export default function ProjectGrid() {
   return (
     <>
       <FilterBar active={filter} onChange={setFilter} />
-      <div className="px-14 py-14 pb-20 grid gap-[3px]" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      <div className="px-14 max-lg:px-8 max-mobile:px-5 py-14 max-mobile:py-7 pb-20 max-mobile:pb-[72px] grid grid-cols-1 mobile:grid-cols-2 lg:grid-cols-3 gap-[3px]">
         {visible.map((project, i) => (
           <ProjectCard key={project.slug} project={project} index={i} />
         ))}

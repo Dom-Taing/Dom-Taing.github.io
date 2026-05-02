@@ -16,6 +16,10 @@
   --font-family-shippori: var(--font-shippori), serif;
   --font-family-serif:    var(--font-dm-serif), serif;
   --font-family-sans:     var(--font-dm-sans), sans-serif;
+
+  /* Custom breakpoints */
+  --breakpoint-mobile: 680px;
+  --breakpoint-xs:     380px;
 }
 
 /* CSS custom properties for JS-driven inline styles */

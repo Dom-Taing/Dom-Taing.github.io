@@ -11,8 +11,9 @@ function SidebarRow({ label, children }: { label: string; children: React.ReactN
 
 export default function ProjectSidebar({ project }: { project: Project }) {
   return (
-    <aside className="sticky top-20">
-      <div className="flex flex-col border-t border-[rgba(29,92,58,0.12)]">
+    <aside className="sticky top-20 max-lg:static max-lg:mt-14 max-lg:pt-10 max-lg:border-t max-lg:border-[rgba(29,92,58,0.12)]">
+      {/* Metadata rows — 2-col grid at tablet */}
+      <div className="flex flex-col border-t border-[rgba(29,92,58,0.12)] max-lg:grid max-lg:grid-cols-2 max-lg:border-t-0">
         {project.detail?.role && (
           <SidebarRow label="Role">{project.detail.role}</SidebarRow>
         )}
@@ -43,14 +44,14 @@ export default function ProjectSidebar({ project }: { project: Project }) {
       </div>
 
       {project.links.length > 0 && (
-        <div className="mt-6 flex flex-col">
+        <div className="mt-6 flex flex-col max-lg:flex-row max-lg:flex-wrap max-lg:gap-2 max-mobile:flex-col">
           {project.links.map((link) => (
             <a
               key={link.label}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada border-b border-[rgba(29,92,58,0.18)] py-3 hover:text-yamabuki transition-colors first:border-t first:border-[rgba(29,92,58,0.18)]"
+              className="flex items-center justify-between text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada border-b border-[rgba(29,92,58,0.18)] py-3 hover:text-yamabuki transition-colors first:border-t first:border-[rgba(29,92,58,0.18)] max-lg:border max-lg:rounded-sm max-lg:px-4 max-lg:first:border max-lg:py-2 max-mobile:border-b max-mobile:border-t-0 max-mobile:first:border-t max-mobile:rounded-none max-mobile:px-0 max-mobile:py-3"
             >
               <span>{link.label}</span>
               <span>↗</span>

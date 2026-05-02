@@ -19,11 +19,10 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden px-14 py-[100px] border-t border-[rgba(29,92,58,0.18)]"
-      style={{ display: 'grid', gridTemplateColumns: '4fr 1fr', gap: '80px', alignItems: 'start' }}
+      className="relative overflow-hidden px-14 max-lg:px-8 max-mobile:px-5 py-[100px] max-lg:py-20 max-mobile:py-16 border-t border-[rgba(29,92,58,0.18)] grid grid-cols-[1fr_300px] max-lg:grid-cols-1 gap-20 max-lg:gap-12 items-start"
     >
-      {/* Section number */}
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none">
+      {/* Section number — hidden on mobile */}
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none max-mobile:hidden">
         01
       </span>
 
@@ -46,7 +45,8 @@ export default function About() {
         </motion.h2>
 
         <motion.blockquote
-          className="font-serif italic text-[21px] text-ink leading-[1.5] border-l-[3px] border-hanada pl-5 mb-10"
+          className="font-serif italic text-ink leading-[1.5] border-l-[3px] border-hanada pl-5 mb-10 max-mobile:text-[17px]"
+          style={{ fontSize: 'clamp(17px, 1.4vw, 21px)' }}
           variants={reveal}
           initial="hidden"
           whileInView="visible"
@@ -68,7 +68,7 @@ export default function About() {
         </motion.p>
 
         <motion.div
-          className="flex gap-10 mb-10"
+          className="flex gap-10 mb-10 max-mobile:flex-wrap max-mobile:gap-6"
           variants={reveal}
           initial="hidden"
           whileInView="visible"
@@ -115,16 +115,20 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebar
+          Desktop: flex-col (single column within the 300px grid track)
+          Tablet:  2-col grid — portrait left, info right
+          Mobile:  back to flex-col, portrait shrinks to 100px
+      */}
       <motion.div
-        className="flex flex-col pt-20"
+        className="flex flex-col pt-20 max-lg:pt-0 max-lg:grid max-lg:[grid-template-columns:auto_1fr] max-lg:gap-x-8 max-mobile:flex max-mobile:flex-col"
         variants={reveal}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
         {/* Portrait */}
-        <div className="relative w-full aspect-square rounded-md mb-6 overflow-hidden flex-shrink-0 mx-2">
+        <div className="relative w-full aspect-square rounded-md mb-6 overflow-hidden flex-shrink-0 mx-2 max-lg:w-[140px] max-lg:h-[140px] max-lg:aspect-auto max-lg:mx-0 max-mobile:w-[100px] max-mobile:h-[100px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/profile.jpg"
@@ -133,47 +137,50 @@ export default function About() {
           />
         </div>
 
-        {/* Info rows */}
-        {[
-          { label: 'Status', value: personal.availability, dot: true },
-          { label: 'Location', value: personal.location },
-          { label: 'Timezone', value: personal.timezone },
-          { label: 'Open to', value: 'Full-time · Contract · Remote' },
-        ].map((row, i) => (
-          <div
-            key={row.label}
-            className={`py-3.5 flex flex-col gap-[3px] border-b border-[rgba(29,92,58,0.12)] ${i === 0 ? 'border-t border-[rgba(29,92,58,0.12)]' : ''}`}
-          >
-            <div className="text-[9px] tracking-[0.2em] uppercase text-ink-soft">{row.label}</div>
-            <div className="text-[14px] text-ink font-medium flex items-center">
-              {row.dot && (
-                <span
-                  className="inline-block w-[7px] h-[7px] rounded-full bg-tokiwa mr-1.5 flex-shrink-0"
-                  style={{ animation: 'pulse-dot 2s ease-in-out infinite' }}
-                />
-              )}
-              {row.value}
-            </div>
-          </div>
-        ))}
-
-        {/* Quick links */}
-        <div className="flex flex-col gap-2.5 mt-5">
+        {/* Info + links — wrapped so the tablet 2-col grid works */}
+        <div className="min-w-0">
+          {/* Info rows */}
           {[
-            { label: 'GitHub', href: personal.github },
-            { label: 'LinkedIn', href: personal.linkedin },
-            { label: 'Resume', href: personal.resumeUrl },
-          ].map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada flex items-center justify-between border-b border-[rgba(29,92,58,0.18)] pb-2.5 hover:text-yamabuki transition-colors"
+            { label: 'Status', value: personal.availability, dot: true },
+            { label: 'Location', value: personal.location },
+            { label: 'Timezone', value: personal.timezone },
+            { label: 'Open to', value: 'Full-time · Contract · Remote' },
+          ].map((row, i) => (
+            <div
+              key={row.label}
+              className={`py-3.5 flex flex-col gap-[3px] border-b border-[rgba(29,92,58,0.12)] ${i === 0 ? 'border-t border-[rgba(29,92,58,0.12)]' : ''}`}
             >
-              <span>{link.label}</span><span>&#8599;</span>
-            </a>
+              <div className="text-[9px] tracking-[0.2em] uppercase text-ink-soft">{row.label}</div>
+              <div className="text-[14px] text-ink font-medium flex items-center">
+                {row.dot && (
+                  <span
+                    className="inline-block w-[7px] h-[7px] rounded-full bg-tokiwa mr-1.5 flex-shrink-0"
+                    style={{ animation: 'pulse-dot 2s ease-in-out infinite' }}
+                  />
+                )}
+                {row.value}
+              </div>
+            </div>
           ))}
+
+          {/* Quick links */}
+          <div className="flex flex-col gap-2.5 mt-5">
+            {[
+              { label: 'GitHub',   href: personal.github },
+              { label: 'LinkedIn', href: personal.linkedin },
+              { label: 'Resume',   href: personal.resumeUrl },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[12px] font-semibold tracking-[0.1em] uppercase text-hanada flex items-center justify-between border-b border-[rgba(29,92,58,0.18)] pb-2.5 hover:text-yamabuki transition-colors"
+              >
+                <span>{link.label}</span><span>&#8599;</span>
+              </a>
+            ))}
+          </div>
         </div>
       </motion.div>
     </section>

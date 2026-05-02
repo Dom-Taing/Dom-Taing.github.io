@@ -8,8 +8,8 @@ export default function Experience() {
   const [active, setActive] = useState(0)
 
   return (
-    <section id="experience" className="relative overflow-hidden px-14 py-[100px] bg-bg border-t border-[rgba(29,92,58,0.15)]">
-      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none">
+    <section id="experience" className="relative overflow-hidden px-14 max-lg:px-8 max-mobile:px-5 py-[100px] max-lg:py-20 max-mobile:py-16 bg-bg border-t border-[rgba(29,92,58,0.15)]">
+      <span className="font-shippori font-extrabold text-[120px] leading-none text-[rgba(29,92,58,0.09)] absolute top-[-20px] left-10 pointer-events-none select-none max-mobile:hidden">
         02
       </span>
 
@@ -29,9 +29,9 @@ export default function Experience() {
         Where I&apos;ve worked.
       </motion.h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr' }}>
-        {/* Sidebar nav */}
-        <div>
+      <div className="grid grid-cols-1 mobile:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+        {/* Sidebar nav — hidden on mobile */}
+        <div className="hidden mobile:block">
           <div className="sticky top-20">
             {experience.map((exp, i) => (
               <button
@@ -56,16 +56,17 @@ export default function Experience() {
         </div>
 
         {/* Entries */}
-        <div className="pl-14 border-l-2 border-[rgba(29,92,58,0.2)]">
+        <div className="border-t-2 border-[rgba(29,92,58,0.2)] pt-8 mobile:border-t-0 mobile:border-l-2 mobile:pt-0 mobile:pl-9 lg:pl-14">
           {experience.map((exp, i) => (
             <div
               key={exp.company}
-              className="pb-[72px] transition-opacity duration-[400ms]"
-              style={{ opacity: active === i ? 1 : 0.4 }}
+              className={`transition-opacity duration-[400ms] ${
+                active === i ? 'opacity-100' : 'opacity-100 mobile:opacity-40'
+              } pb-10 border-b border-[rgba(29,92,58,0.12)] last:border-b-0 last:pb-0 mobile:pb-[72px] mobile:border-b-0`}
             >
               <div className="text-[11px] tracking-[0.14em] uppercase text-yamabuki font-semibold mb-1.5">{exp.period}</div>
               <div className="text-[13px] text-ink-soft mb-5">{exp.company}</div>
-              <div className="font-serif text-[28px] text-ink mb-3.5 leading-[1.2]">{exp.role}</div>
+              <div className="font-serif text-[28px] max-mobile:text-[22px] text-ink mb-3.5 leading-[1.2]">{exp.role}</div>
               <p className="text-[15px] leading-[1.8] text-ink-mid mb-5">{exp.description}</p>
               <div className="flex flex-wrap gap-2">
                 {exp.tags.map((tag) => (

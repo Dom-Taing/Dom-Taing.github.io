@@ -4,7 +4,7 @@ export default function ProjectHero({ project }: { project: Project }) {
   const hasStats = (project.detail?.metrics.length ?? 0) > 0
 
   return (
-    <div className="relative px-14 pb-20 pt-[130px] bg-hero-bg overflow-hidden">
+    <div className="relative px-14 max-lg:px-8 max-mobile:px-5 pb-20 max-lg:pb-16 max-mobile:pb-[52px] pt-[130px] max-lg:pt-[120px] max-mobile:pt-[100px] bg-hero-bg overflow-hidden">
       {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -59,7 +59,7 @@ export default function ProjectHero({ project }: { project: Project }) {
 
       {/* Tagline */}
       <p
-        className="relative z-10 font-serif italic text-white/50 max-w-[600px] leading-[1.5] mb-10"
+        className="relative z-10 font-serif italic text-white/50 max-w-[600px] leading-[1.5] mb-10 max-mobile:text-[15px] max-mobile:mb-7"
         style={{ fontSize: 'clamp(16px, 1.5vw, 21px)' }}
       >
         {project.tagline ?? project.description}
@@ -67,10 +67,10 @@ export default function ProjectHero({ project }: { project: Project }) {
 
       {/* Stats row */}
       {hasStats && (
-        <div className="relative z-10 flex flex-wrap gap-10 pt-8 border-t border-white/[0.08]">
+        <div className="relative z-10 flex flex-wrap gap-10 max-lg:gap-7 max-mobile:gap-5 pt-8 border-t border-white/[0.08]">
           {project.detail!.metrics.map((m) => (
             <div key={m.label}>
-              <div className="font-shippori font-extrabold text-tokiwa leading-none mb-1" style={{ fontSize: 36 }}>
+              <div className="font-shippori font-extrabold text-tokiwa leading-none mb-1 text-[36px] max-mobile:text-[28px]">
                 {m.number}
               </div>
               <div className="text-[11px] text-white/30 tracking-[0.1em] uppercase">{m.label}</div>

@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   return (
     <main className="bg-bg pt-16">
       {/* Page header */}
-      <div className="relative px-14 pb-[72px] pt-[140px] bg-hero-bg overflow-hidden">
+      <div className="relative px-14 max-lg:px-8 max-mobile:px-5 pb-[72px] max-lg:pb-[60px] max-mobile:pb-12 pt-[140px] max-lg:pt-[120px] max-mobile:pt-[100px] bg-hero-bg overflow-hidden">
         {/* Dot grid */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -33,10 +33,13 @@ export default function ProjectsPage() {
           style={{ background: 'linear-gradient(to right, var(--hanada) 0%, var(--tokiwa) 40%, transparent 70%)' }}
         />
 
-        {/* Back link */}
+        {/* Back link
+            Desktop/Tablet: absolute positioned top-right
+            Mobile: static inline-flex with margin-bottom
+        */}
         <a
           href="/"
-          className="absolute top-[84px] right-14 z-10 text-[11px] font-semibold tracking-[0.12em] uppercase text-white/40 hover:text-white transition-colors border-b border-white/20 pb-px"
+          className="z-10 text-[11px] font-semibold tracking-[0.12em] uppercase text-white/40 hover:text-white transition-colors border-b border-white/20 pb-px absolute top-[84px] max-lg:top-[80px] right-14 max-lg:right-8 max-mobile:static max-mobile:inline-flex max-mobile:mb-6"
         >
           ← Back Home
         </a>
@@ -56,7 +59,7 @@ export default function ProjectsPage() {
         <div className="overflow-hidden relative z-10">
           <motion.h1
             className="font-shippori font-extrabold text-white leading-[0.92] tracking-[0.02em]"
-            style={{ fontSize: 'clamp(64px, 9vw, 128px)' }}
+            style={{ fontSize: 'clamp(52px, 9vw, 128px)' }}
             {...dropIn(0.2)}
           >
             All <span className="text-yamabuki">Projects.</span>

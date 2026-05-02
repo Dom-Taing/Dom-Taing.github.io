@@ -10,7 +10,7 @@ export const personal: Personal = {
   email: 'dom.taing2002@gmail.com',
   github: 'https://github.com/Dom-Taing',
   linkedin: 'https://www.linkedin.com/in/keochonodom-taing/',
-  resumeUrl: 'https://www.linkedin.com/in/keochonodom-taing/',
+  resumeUrl: '/Resume.pdf',
 }
 
 export const stats: Stat[] = [
@@ -189,7 +189,8 @@ export const projects: Project[] = [
         { layer: 'AI', items: ['LangChain', 'Claude Haiku/Sonnet', 'OpenRouter'] },
         { layer: 'Infra', items: ['Docker', 'pgcrypto'] },
       ],
-      screenshots: [],
+      screenshots: ['/thoth/Thoth.svg.png'],
+      screenshotStyle: 'contain',
     },
   },
   {

@@ -11,7 +11,7 @@ export default function HeroImage({
 }) {
   if (youTube) {
     return (
-      <div className="w-full border-b border-[rgba(29,92,58,0.1)] bg-ink" style={{ aspectRatio: '21/9' }}>
+      <div className="w-full border-b border-[rgba(29,92,58,0.1)] bg-ink [aspect-ratio:21/9] max-mobile:[aspect-ratio:16/9]">
         <iframe
           src={`https://www.youtube.com/embed/${youTube}`}
           className="w-full h-full"
@@ -25,7 +25,7 @@ export default function HeroImage({
 
   if (illustration === 'waveform') {
     return (
-      <div className="w-full border-b border-[rgba(29,92,58,0.1)]" style={{ aspectRatio: '21/9', background: '#0b1410' }}>
+      <div className="w-full border-b border-[rgba(29,92,58,0.1)] [aspect-ratio:21/9] max-mobile:[aspect-ratio:16/9]" style={{ background: '#0b1410' }}>
         <WaveformIllustration />
       </div>
     )
@@ -33,7 +33,7 @@ export default function HeroImage({
 
   if (video) {
     return (
-      <div className="w-full border-b border-[rgba(29,92,58,0.1)] bg-ink" style={{ aspectRatio: '21/9' }}>
+      <div className="w-full border-b border-[rgba(29,92,58,0.1)] bg-ink [aspect-ratio:21/9] max-mobile:[aspect-ratio:16/9]">
         <video src={video} className="w-full h-full object-cover" controls playsInline />
       </div>
     )
@@ -42,8 +42,7 @@ export default function HeroImage({
   if (src) {
     return (
       <div
-        className={`w-full border-b border-[rgba(29,92,58,0.1)] bg-bg-warm flex items-center justify-center ${contain ? 'p-10' : ''}`}
-        style={{ aspectRatio: '21/9' }}
+        className={`w-full border-b border-[rgba(29,92,58,0.1)] bg-bg-warm flex items-center justify-center [aspect-ratio:21/9] max-mobile:[aspect-ratio:16/9] ${contain ? 'p-10' : ''}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt="" className={`${contain ? 'max-w-full max-h-full object-contain' : 'w-full h-full object-cover'}`} />
@@ -52,10 +51,7 @@ export default function HeroImage({
   }
 
   return (
-    <div
-      className="w-full bg-bg-warm border-b border-[rgba(29,92,58,0.1)] relative flex items-center justify-center"
-      style={{ aspectRatio: '21/9' }}
-    >
+    <div className="w-full bg-bg-warm border-b border-[rgba(29,92,58,0.1)] relative flex items-center justify-center [aspect-ratio:21/9] max-mobile:[aspect-ratio:16/9]">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

@@ -3,15 +3,13 @@ import { projects } from '@/data/portfolio'
 import type { Project } from '@/types'
 
 export default function ProjectNav({ current }: { current: Project }) {
-  const idx = projects.findIndex((p) => p.slug === current.slug)
-  const prev = idx > 0 ? projects[idx - 1] : null
-  const next = idx < projects.length - 1 ? projects[idx + 1] : null
+  const visible = projects.filter((p) => !p.hidden)
+  const visIdx = visible.findIndex((p) => p.slug === current.slug)
+  const prev = visIdx > 0 ? visible[visIdx - 1] : null
+  const next = visIdx < visible.length - 1 ? visible[visIdx + 1] : null
 
   return (
-    <div
-      className="bg-ink border-t-2 border-[rgba(29,92,58,0.3)] relative overflow-hidden"
-      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}
-    >
+    <div className="bg-ink border-t-2 border-[rgba(29,92,58,0.3)] relative overflow-hidden grid grid-cols-1 mobile:grid-cols-2">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -22,7 +20,7 @@ export default function ProjectNav({ current }: { current: Project }) {
       {prev ? (
         <Link
           href={`/projects/${prev.slug}`}
-          className="relative z-10 px-14 py-16 border-r border-white/[0.06] group hover:bg-white/[0.02] transition-colors"
+          className="relative z-10 px-14 max-lg:px-8 max-mobile:px-5 py-16 max-lg:py-14 max-mobile:py-12 border-r border-white/[0.06] max-mobile:border-r-0 max-mobile:border-b group hover:bg-white/[0.02] transition-colors"
         >
           <div className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-white/30 mb-4">
             <span className="w-5 h-px bg-current inline-block" />
@@ -41,7 +39,7 @@ export default function ProjectNav({ current }: { current: Project }) {
       {next ? (
         <Link
           href={`/projects/${next.slug}`}
-          className="relative z-10 px-14 py-16 text-right group hover:bg-white/[0.02] transition-colors"
+          className="relative z-10 px-14 max-lg:px-8 max-mobile:px-5 py-16 max-lg:py-14 max-mobile:py-12 text-right group hover:bg-white/[0.02] transition-colors"
         >
           <div className="flex items-center justify-end gap-2 text-[10px] tracking-[0.22em] uppercase text-white/30 mb-4">
             Next Project

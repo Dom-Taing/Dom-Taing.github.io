@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation'
 import { projects } from '@/data/portfolio'
-import Nav from '@/components/Nav'
 import ProjectHero from '@/components/project-detail/ProjectHero'
 import HeroImage from '@/components/project-detail/HeroImage'
 import ProjectContent from '@/components/project-detail/ProjectContent'
@@ -29,16 +28,12 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   return (
     <main className="bg-bg">
-      <Nav />
       <div className="pt-16">
         <ProjectHero project={project} />
         <HeroImage src={heroScreenshot} video={project.heroVideo} youTube={project.heroYouTube} illustration={project.heroIllustration} contain={project.detail?.screenshotStyle === 'contain'} />
 
         {/* Content + sidebar */}
-        <div
-          className="px-14 py-20 items-start"
-          style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 80 }}
-        >
+        <div className="px-14 max-lg:px-8 max-mobile:px-5 py-20 max-lg:py-14 max-mobile:py-11 items-start grid grid-cols-[1fr_300px] max-lg:grid-cols-1 gap-20 max-lg:gap-0">
           <div>
             <ProjectContent project={project} />
             {hasMetrics && <Metrics metrics={project.detail!.metrics} />}

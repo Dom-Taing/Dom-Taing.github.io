@@ -40,13 +40,13 @@ export default function ProjectContent({ project }: { project: Project }) {
           <h2 className="font-serif text-ink mb-7 leading-[1.15]" style={{ fontSize: 'clamp(28px, 3vw, 42px)' }}>
             Challenge &amp; approach.
           </h2>
-          <div className="grid gap-[3px]" style={{ gridTemplateColumns: '1fr 1fr' }}>
-            <div className="bg-bg-warm p-8 relative">
+          <div className="grid grid-cols-1 mobile:grid-cols-2 gap-[3px]">
+            <div className="bg-bg-warm p-8 max-mobile:px-5 max-mobile:py-6 relative">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-yamabuki" />
               <div className="text-[9px] tracking-[0.22em] uppercase font-bold text-yamabuki mb-4">Challenge</div>
               <p className="text-[14px] leading-[1.8] text-ink-mid">{overview}</p>
             </div>
-            <div className="bg-bg-warm p-8 relative">
+            <div className="bg-bg-warm p-8 max-mobile:px-5 max-mobile:py-6 relative">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-hanada" />
               <div className="text-[9px] tracking-[0.22em] uppercase font-bold text-tokiwa mb-4">Approach</div>
               <p className="text-[14px] leading-[1.8] text-ink-mid">{approach}</p>
@@ -62,7 +62,15 @@ export default function ProjectContent({ project }: { project: Project }) {
           <h2 className="font-serif text-ink mb-7 leading-[1.15]" style={{ fontSize: 'clamp(28px, 3vw, 42px)' }}>
             Key screens.
           </h2>
-          <div className="grid gap-[3px]" style={{ gridTemplateColumns: screenshots.length === 1 ? '1fr' : '1fr 1fr' }}>
+          <div
+            className={`grid gap-[3px] ${
+              screenshots.length === 1
+                ? 'grid-cols-1'
+                : screenshots.length >= 3
+                ? 'grid-cols-1 mobile:grid-cols-2 lg:grid-cols-3'
+                : 'grid-cols-1 mobile:grid-cols-2'
+            }`}
+          >
             {screenshots.map((src, i) => (
               <div
                 key={i}
