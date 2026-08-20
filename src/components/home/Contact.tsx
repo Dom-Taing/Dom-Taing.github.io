@@ -51,7 +51,6 @@ export default function Contact() {
         {[
           { label: personal.email,           href: `mailto:${personal.email}` },
           { label: 'GitHub — @Dom-Taing',    href: personal.github },
-          { label: 'LinkedIn',               href: personal.linkedin },
           { label: 'Resume / CV',            href: personal.resumeUrl },
         ].map((link, i) => (
           <a

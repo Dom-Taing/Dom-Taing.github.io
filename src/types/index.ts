@@ -62,6 +62,5 @@ export interface Personal {
   availability: string
   email: string
   github: string
-  linkedin: string
   resumeUrl: string
 }

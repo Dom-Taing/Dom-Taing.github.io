@@ -167,7 +167,6 @@ export default function About() {
           <div className="flex flex-col gap-2.5 mt-5">
             {[
               { label: 'GitHub',   href: personal.github },
-              { label: 'LinkedIn', href: personal.linkedin },
               { label: 'Resume',   href: personal.resumeUrl },
             ].map((link) => (
               <a

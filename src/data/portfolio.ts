@@ -9,7 +9,6 @@ export const personal: Personal = {
   availability: 'Open to opportunities',
   email: 'dom.taing2002@gmail.com',
   github: 'https://github.com/Dom-Taing',
-  linkedin: 'https://www.linkedin.com/in/keochonodom-taing/',
   resumeUrl: '/Resume.pdf',
 }
 
