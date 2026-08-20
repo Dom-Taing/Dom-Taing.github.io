@@ -14,7 +14,7 @@ export const personal: Personal = {
 }
 
 export const stats: Stat[] = [
-  { number: '3+', label: 'Years exp.' },
+  { number: '8+', label: 'Years exp.' },
   { number: '800K+', label: 'Platform users reached' },
   { number: '10+', label: 'Projects shipped' },
 ]
@@ -45,10 +45,31 @@ export const skills: SkillGroup[] = [
 export const experience: ExperienceEntry[] = [
   {
     company: 'Walmart',
-    role: 'Software Engineer III · Contract',
+    role: 'React Developer',
     period: 'Mar 2023 — Present',
-    description: 'Contributed to Walmart Creator, a platform serving 800K+ creators and 50K+ storefronts. Led full-stack development across three core systems: Storefront publishing (co-led an architecture redesign that cut publish time from 30 minutes to instant), Affiliate Links (built the generation API across storefronts, collections, and shoppable posts — optimized response time from 300ms to near-zero), and the Marty AI Chatbot (designed system architecture, built the MFE-based UI with Webpack Module Federation, and implemented LangChain agents for creator Q&A).',
-    tags: ['Next.js', 'Node.js', 'Directus', 'LangChain', 'Module Federation', 'REST APIs'],
+    description: 'Building Walmart Creator, Walmart’s influencer commerce platform where creators build personalized storefronts, curate shoppable collections, and generate affiliate links — scaled from MVP through General Availability for 800K+ creators and 50K+ storefronts. Co-led the architecture redesign of the Storefront publishing pipeline, cutting publish time from 30 minutes to near-instant by routing Walmart’s main site to fetch directly from an internal API. Designed the system architecture and full-stack implementation of the Marty AI Chatbot using LangChain agents and a Webpack Module Federation MFE. Built and optimized the Affiliate Link Generation API across storefronts, collections, and shoppable posts, cutting response time from 300ms to near-zero. Delivered full-stack features on a Next.js frontend and Node.js/Directus backend, leveraging SSR for faster initial loads and better SEO, with unit tests in Jest and React Testing Library.',
+    tags: ['Next.js', 'React', 'Node.js', 'Directus', 'LangChain', 'Module Federation', 'SSR', 'Jest'],
+  },
+  {
+    company: 'Artly Coffee',
+    role: 'Front-End Developer',
+    period: 'Jul 2021 — Mar 2023',
+    description: 'Front-end developer at a robotics-driven coffee chain whose machine-learning-trained robotic baristas brew every cup. Developed and maintained the ordering web app in React and TypeScript, using static typing to keep the codebase reliable as it grew. Integrated the front end with backend services via Axios and REST APIs, and used function components, HOCs, and custom hooks to keep logic reusable across features. Managed global state and user information with Redux, implemented dynamic routing with React Router, and worked in an Agile/Scrum team that regularly reassessed goals and priorities.',
+    tags: ['React', 'TypeScript', 'Redux', 'React Router', 'Axios', 'REST APIs'],
+  },
+  {
+    company: 'Zenoti',
+    role: 'Software Engineer',
+    period: 'Mar 2020 — Jun 2021',
+    description: 'Worked on Zenoti’s all-in-one cloud platform for the spa, salon, and med spa industry — covering online bookings, POS, CRM, employee and inventory management, and marketing. Built dashboards and charts with React and Recharts to display, filter, and analyze business data, transforming raw API data into interactive visualizations that told a clear story. Implemented React Router for dynamic routing between dashboard tabs and used the component lifecycle to optimize Virtual DOM updates. Wrote comprehensive unit tests with Jest and React Testing Library, and collaborated in an agile environment through regular scrum ceremonies.',
+    tags: ['React', 'Recharts', 'React Router', 'Jest', 'React Testing Library', 'Agile'],
+  },
+  {
+    company: 'E-Khmer',
+    role: 'Software Engineer',
+    period: 'Apr 2018 — Feb 2020',
+    description: 'Software engineer at a web design and consulting firm serving clients across many industries, remote from Phnom Penh, Cambodia. Main project: CDRI, a website for a Cambodian research institute with an admin interface for entering and managing research data and a public-facing site showcasing that research to the world. Built and maintained the cross-browser web application with React, JavaScript, HTML, CSS, Redux, Webpack, and Babel, and developed a robust front-end interface for CRUD-based data management. Built reusable UI components for future front-end projects, managed dependencies with npm, and used Git for version control across the team.',
+    tags: ['React', 'JavaScript', 'Redux', 'Webpack', 'Babel', 'HTML5', 'CSS3', 'Git'],
   },
 ]
 
