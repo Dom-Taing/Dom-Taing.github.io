@@ -1,11 +1,65 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { experience } from '@/data/portfolio'
 
+// The entry whose top has passed this line (fraction of viewport height) wins.
+const FOCUS_LINE = 0.38
+// Fixed nav is 64px tall; leave a little breathing room above a clicked entry.
+const SCROLL_OFFSET = 64 + 28
+
 export default function Experience() {
   const [active, setActive] = useState(0)
+  const entryRefs = useRef<(HTMLDivElement | null)[]>([])
+  // While the page is animating toward a clicked entry, scroll must not fight the click.
+  const locked = useRef(false)
+  const unlockTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const releaseAfterScrollSettles = useCallback(() => {
+    if (unlockTimer.current) clearTimeout(unlockTimer.current)
+    unlockTimer.current = setTimeout(() => { locked.current = false }, 140)
+  }, [])
+
+  useEffect(() => {
+    let frame = 0
+
+    const measure = () => {
+      frame = 0
+      if (locked.current) return
+
+      const line = window.innerHeight * FOCUS_LINE
+      let next = 0
+      entryRefs.current.forEach((el, i) => {
+        if (el && el.getBoundingClientRect().top <= line) next = i
+      })
+      setActive((prev) => (prev === next ? prev : next))
+    }
+
+    const onScroll = () => {
+      if (locked.current) releaseAfterScrollSettles()
+      if (!frame) frame = requestAnimationFrame(measure)
+    }
+
+    measure()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+      if (unlockTimer.current) clearTimeout(unlockTimer.current)
+    }
+  }, [releaseAfterScrollSettles])
+
+  const goTo = (i: number) => {
+    setActive(i)
+    const el = entryRefs.current[i]
+    if (!el) return
+    locked.current = true
+    releaseAfterScrollSettles()
+    window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - SCROLL_OFFSET })
+  }
 
   return (
     <section id="experience" className="relative overflow-hidden px-14 max-lg:px-8 max-mobile:px-5 py-[100px] max-lg:py-20 max-mobile:py-16 bg-bg border-t border-[rgba(29,92,58,0.15)]">
@@ -36,7 +90,8 @@ export default function Experience() {
             {experience.map((exp, i) => (
               <button
                 key={exp.company}
-                onClick={() => setActive(i)}
+                onClick={() => goTo(i)}
+                aria-current={active === i}
                 className={`flex items-center gap-3.5 w-full text-left py-3.5 border-b border-[rgba(29,92,58,0.12)] transition-colors ${
                   active === i ? 'text-hanada' : 'text-ink-soft hover:text-hanada'
                 }`}
@@ -60,6 +115,7 @@ export default function Experience() {
           {experience.map((exp, i) => (
             <div
               key={exp.company}
+              ref={(el) => { entryRefs.current[i] = el }}
               className={`transition-opacity duration-[400ms] ${
                 active === i ? 'opacity-100' : 'opacity-100 mobile:opacity-40'
               } pb-10 border-b border-[rgba(29,92,58,0.12)] last:border-b-0 last:pb-0 mobile:pb-[72px] mobile:border-b-0`}
