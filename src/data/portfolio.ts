@@ -4,7 +4,7 @@ export const personal: Personal = {
   name: 'Dom Taing',
   title: 'Full Stack Developer',
   tagline: 'I build fast, beautiful web applications — end to end.',
-  location: 'Seattle, Washington',
+  location: 'Bellevue, Washington',
   timezone: 'PST (UTC−8)',
   availability: 'Open to opportunities',
   email: 'dom.taing.swe@gmail.com',
